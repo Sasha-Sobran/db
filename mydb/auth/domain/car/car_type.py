@@ -24,7 +24,4 @@ class CarType(db.Model, IDto):
         return obj
 
     def put_into_dto(self) -> dict[str, Any]:
-        return {
-            "id": self.id,
-            "name": self.name
-        }
+        return {"id": self.id, "name": self.name}
