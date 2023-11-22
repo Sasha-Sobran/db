@@ -50,7 +50,7 @@ def create_all_car_types() -> Response:
     content = request.get_json()
     car_types = [CarType.create_from_dto(data) for data in content]
     car_type_controller.create_all(car_types)
-    return make_response("CarTypes created", HTTPStatus.CREATED)
+    return make_response(car_type_controller.create_all(car_types), HTTPStatus.CREATED)
 
 
 @car_type_bp.delete("/all")

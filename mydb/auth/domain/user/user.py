@@ -21,9 +21,9 @@ class User(IDto, db.Model):
     gender = Column(String(25), nullable=False)
     city_name = Column(String(45), nullable=False)
 
-    seller = relationship("Seller", back_populates="user")
+    seller = relationship("Seller", back_populates="user", primaryjoin="User.id == Seller.user_id")
     comments = relationship("Comment", back_populates="user")
-    car_dealerships = relationship("CarDealership", back_populates="user")
+    car_dealerships = relationship("UserCarDealership", back_populates="user", primaryjoin="User.id == UserCarDealership.user_id")
 
     def __repr__(self):
         return f"User(id={self.id}, name={self.name}, surname={self.surname}, email={self.email}, " \

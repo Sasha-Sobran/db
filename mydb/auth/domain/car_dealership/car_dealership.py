@@ -22,7 +22,8 @@ class CarDealership(IDto, db.Model):
 
     sellers = relationship("CarDealershipSeller", back_populates="car_dealership")
     advertisement = relationship("Advertisement", back_populates="car_dealership")
-    user = relationship("User", back_populates="car_dealership")
+    users = relationship("UserCarDealership", back_populates="car_dealership",
+                         primaryjoin="CarDealership.id == UserCarDealership.car_dealership_id")
 
     def __repr__(self):
         return f"CarDealership(id={self.id}, name={self.name}, email={self.email}, phone={self.phone}, " \
