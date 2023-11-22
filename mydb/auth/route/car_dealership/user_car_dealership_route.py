@@ -57,3 +57,13 @@ def create_all_user_car_dealerships() -> Response:
 def delete_all_user_car_dealerships() -> Response:
     user_car_dealership_controller.delete_all()
     return make_response("All UserCarDealerships deleted", HTTPStatus.OK)
+
+
+@user_car_dealership_bp.get("/user_car_dealerships")
+def user_car_dealerships():
+    return make_response(jsonify(user_car_dealership_controller.user_car_dealerships()), HTTPStatus.OK)
+
+
+@user_car_dealership_bp.get("/car_dealerships_user")
+def car_dealerships_user():
+    return make_response(jsonify(user_car_dealership_controller.car_dealerships_user()), HTTPStatus.OK)

@@ -57,3 +57,8 @@ def create_all_cars() -> Response:
 def delete_all_cars() -> Response:
     car_controller.delete_all()
     return make_response("All Cars deleted", HTTPStatus.OK)
+
+
+@car_bp.get("test_drives/<int:car_id>")
+def get_car_test_drives(car_id):
+    return make_response(jsonify(car_controller.get_test_drives(car_id)), HTTPStatus.OK)

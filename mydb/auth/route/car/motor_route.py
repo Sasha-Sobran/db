@@ -57,3 +57,7 @@ def create_all_motors() -> Response:
 def delete_all_motors() -> Response:
     motor_controller.delete_all()
     return make_response("All Motors deleted", HTTPStatus.OK)
+
+@motor_bp.get("cars/<int:id>")
+def get_cars_with_car_types(id: int):
+    return make_response(jsonify(motor_controller.get_cars(id)), HTTPStatus.OK)

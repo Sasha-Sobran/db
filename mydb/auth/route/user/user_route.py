@@ -57,3 +57,8 @@ def create_all_users() -> Response:
 def delete_all_users() -> Response:
     user_controller.delete_all()
     return make_response("All Users deleted", HTTPStatus.OK)
+
+@user_bp.get("/comments/<int:user_id>")
+def get_advertisement_comments(user_id):
+    return make_response(jsonify(user_controller.get_comments(user_id)), HTTPStatus.OK)
+

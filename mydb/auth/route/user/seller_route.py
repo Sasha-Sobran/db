@@ -57,3 +57,8 @@ def create_all_sellers() -> Response:
 def delete_all_sellers() -> Response:
     seller_controller.delete_all()
     return make_response("All Sellers deleted", HTTPStatus.OK)
+
+
+@seller_bp.get("/advertisements/<int:seller_id>")
+def get_seller_advertisements(seller_id: int):
+    return make_response(jsonify(seller_controller.get_advertisements(seller_id)), HTTPStatus.OK)

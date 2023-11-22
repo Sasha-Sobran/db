@@ -1,5 +1,7 @@
 from http import HTTPStatus
 from flask import Blueprint, Response, request, make_response, jsonify
+
+from mydb import db
 from mydb.auth.controller import advertisement_controller
 from mydb.auth.domain.advertisement.advertisement import Advertisement
 
@@ -57,3 +59,12 @@ def create_all_advertisements() -> Response:
 def delete_all_advertisements() -> Response:
     advertisement_controller.delete_all()
     return make_response("All Advertisements deleted", HTTPStatus.OK)
+
+
+@advertisement_bp.get("/comments/<int:advertisement_id>")
+def get_advertisement_comments(advertisement_id):
+    return make_response(jsonify(advertisement_controller.get_comments(advertisement_id)), HTTPStatus.OK)
+
+@advertisement_bp.get("/images/<int:advertisement_id>")
+def get_advertisement_images(advertisement_id):
+    return make_response(jsonify(advertisement_controller.get_images(advertisement_id)), HTTPStatus.OK)
