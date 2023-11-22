@@ -134,3 +134,4 @@ db1/
 .vscode/
 fill_db.sql
 .idea/
+config/

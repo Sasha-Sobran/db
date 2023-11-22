@@ -10,6 +10,6 @@ def register_routes(app: Flask) -> None:
     """
     app.register_blueprint(err_handler_bp)
 
-    from .car.car_route import car_bp
+    from .car.car_type_route import car_type_bp
 
-    app.register_blueprint(car_bp)
+    app.register_blueprint(car_type_bp)

@@ -11,6 +11,7 @@ class GeneralDAO(ABC):
     """
     The common realization of Data Access class.
     """
+
     _domain_type = None
     _session = db.session
 
