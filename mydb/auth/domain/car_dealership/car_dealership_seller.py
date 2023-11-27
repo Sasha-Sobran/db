@@ -12,9 +12,8 @@ from mydb.auth.domain.i_dto import IDto
 class CarDealershipSeller(IDto, db.Model):
     __tablename__ = "car_dealership_seller"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    car_dealership_id = Column(Integer, ForeignKey('car_dealership.id'), nullable=False)
-    seller_user_id = Column(Integer, ForeignKey('seller.user_id'), nullable=False)
+    car_dealership_id = Column(Integer, ForeignKey('car_dealership.id'), nullable=False, primary_key=True)
+    seller_user_id = Column(Integer, ForeignKey('seller.user_id'), nullable=False, primary_key=True)
 
     car_dealership = relationship("CarDealership", back_populates="sellers")
     seller = relationship("Seller", back_populates="car_dealerships")
