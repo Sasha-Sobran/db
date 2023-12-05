@@ -14,6 +14,8 @@ class UserService(GeneralService):
         if user is None:
             abort(HTTPStatus.NOT_FOUND)
 
-        comments = [{"comment text": comment.text, "user": self._dao.find_by_id(id).name} for comment in
-                    user.comments]
+        comments = [
+            {"comment text": comment.text, "user": self._dao.find_by_id(id).name}
+            for comment in user.comments
+        ]
         return comments

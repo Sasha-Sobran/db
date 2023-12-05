@@ -13,16 +13,18 @@ class Comment(IDto, db.Model):
     __tablename__ = "comment"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    advertisement_id = Column(Integer, ForeignKey('advertisement.id'), nullable=False)
+    advertisement_id = Column(Integer, ForeignKey("advertisement.id"), nullable=False)
     text = Column(String(150), nullable=False)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
 
     advertisement = relationship("Advertisement", back_populates="comments")
     user = relationship("User", back_populates="comments")
 
     def __repr__(self):
-        return f"Comment(id={self.id}, advertisement_id={self.advertisement_id}, text={self.text}, " \
-               f"user_id={self.user_id})"
+        return (
+            f"Comment(id={self.id}, advertisement_id={self.advertisement_id}, text={self.text}, "
+            f"user_id={self.user_id})"
+        )
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> Comment:

@@ -14,8 +14,13 @@ class AdvertisementService(GeneralService):
         if advertisement is None:
             abort(HTTPStatus.NOT_FOUND)
 
-        comments = [{"comment text": comment.text, "user": user_dao.find_by_id(comment.user_id).name} for comment in
-                    advertisement.comments]
+        comments = [
+            {
+                "comment text": comment.text,
+                "user": user_dao.find_by_id(comment.user_id).name,
+            }
+            for comment in advertisement.comments
+        ]
         return comments
 
     def get_images(self, id):
@@ -24,3 +29,6 @@ class AdvertisementService(GeneralService):
             abort(HTTPStatus.NOT_FOUND)
 
         return advertisement.images
+
+    def get_avg_price(self, operation):
+        return self._dao.get_avg_price(operation)

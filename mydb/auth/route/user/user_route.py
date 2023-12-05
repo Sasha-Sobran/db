@@ -11,12 +11,12 @@ def get_all_users() -> Response:
     return make_response(jsonify(user_controller.find_all()), HTTPStatus.OK)
 
 
-@user_bp.get('/<int:user_id>')
+@user_bp.get("/<int:user_id>")
 def get_users(user_id: int) -> Response:
     return make_response(jsonify(user_controller.find_by_id(user_id)), HTTPStatus.OK)
 
 
-@user_bp.put('/<int:user_id>')
+@user_bp.put("/<int:user_id>")
 def update_user(user_id: int) -> Response:
     content = request.get_json()
     user = User.create_from_dto(content)
@@ -24,14 +24,14 @@ def update_user(user_id: int) -> Response:
     return make_response("User updated", HTTPStatus.OK)
 
 
-@user_bp.patch('/<int:user_id>')
+@user_bp.patch("/<int:user_id>")
 def patch_user(user_id: int) -> Response:
     content = request.get_json()
     user_controller.patch(user_id, content)
     return make_response("User updated", HTTPStatus.OK)
 
 
-@user_bp.delete('/<int:user_id>')
+@user_bp.delete("/<int:user_id>")
 def delete_user(user_id: int) -> Response:
     user_controller.delete(user_id)
     return make_response("User deleted", HTTPStatus.OK)
@@ -58,7 +58,7 @@ def delete_all_users() -> Response:
     user_controller.delete_all()
     return make_response("All Users deleted", HTTPStatus.OK)
 
+
 @user_bp.get("/comments/<int:user_id>")
 def get_advertisement_comments(user_id):
     return make_response(jsonify(user_controller.get_comments(user_id)), HTTPStatus.OK)
-

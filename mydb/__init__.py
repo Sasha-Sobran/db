@@ -35,7 +35,7 @@ def create_app(app_config: Dict[str, Any], additional_config: Dict[str, Any]) ->
 
     _init_db(app)
     register_routes(app)
-    _init_swagger(app)  
+    _init_swagger(app)
 
     return app
 

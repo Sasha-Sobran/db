@@ -10,3 +10,6 @@ class AdvertisementController(GeneralController):
 
     def get_images(self, id):
         return [image.put_into_dto() for image in self._service.get_images(id)]
+
+    def get_avg_price(self, operation):
+        return self._service.get_avg_price(operation)

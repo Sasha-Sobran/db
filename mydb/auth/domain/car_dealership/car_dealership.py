@@ -16,18 +16,21 @@ class CarDealership(IDto, db.Model):
     name = Column(String(45), nullable=False)
     email = Column(String(45), nullable=False)
     phone = Column(String(45), nullable=False)
-    street_address = Column(String(45), nullable=False)
-    city_name = Column(String(45), nullable=False)
     site_url = Column(String(100))
 
     sellers = relationship("CarDealershipSeller", back_populates="car_dealership")
     advertisement = relationship("Advertisement", back_populates="car_dealership")
-    users = relationship("UserCarDealership", back_populates="car_dealership",
-                         primaryjoin="CarDealership.id == UserCarDealership.car_dealership_id")
+    users = relationship(
+        "UserCarDealership",
+        back_populates="car_dealership",
+        primaryjoin="CarDealership.id == UserCarDealership.car_dealership_id",
+    )
 
     def __repr__(self):
-        return f"CarDealership(id={self.id}, name={self.name}, email={self.email}, phone={self.phone}, " \
-               f"street_address={self.street_address}, city_name={self.city_name}, site_url={self.site_url})"
+        return (
+            f"CarDealership(id={self.id}, name={self.name}, email={self.email}, phone={self.phone}, "
+            f"site_url={self.site_url})"
+        )
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> CarDealership:
@@ -36,8 +39,6 @@ class CarDealership(IDto, db.Model):
             name=dto_dict.get("name"),
             email=dto_dict.get("email"),
             phone=dto_dict.get("phone"),
-            street_address=dto_dict.get("street_address"),
-            city_name=dto_dict.get("city_name"),
             site_url=dto_dict.get("site_url"),
         )
         return obj
@@ -48,7 +49,5 @@ class CarDealership(IDto, db.Model):
             "name": self.name,
             "email": self.email,
             "phone": self.phone,
-            "street_address": self.street_address,
-            "city_name": self.city_name,
             "site_url": self.site_url,
         }

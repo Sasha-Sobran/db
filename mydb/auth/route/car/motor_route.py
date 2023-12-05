@@ -11,12 +11,12 @@ def get_all_motors() -> Response:
     return make_response(jsonify(motor_controller.find_all()), HTTPStatus.OK)
 
 
-@motor_bp.get('/<int:motor_id>')
+@motor_bp.get("/<int:motor_id>")
 def get_motors(motor_id: int) -> Response:
     return make_response(jsonify(motor_controller.find_by_id(motor_id)), HTTPStatus.OK)
 
 
-@motor_bp.put('/<int:motor_id>')
+@motor_bp.put("/<int:motor_id>")
 def update_motor(motor_id: int) -> Response:
     content = request.get_json()
     motor = Motor.create_from_dto(content)
@@ -24,14 +24,14 @@ def update_motor(motor_id: int) -> Response:
     return make_response("Motor updated", HTTPStatus.OK)
 
 
-@motor_bp.patch('/<int:motor_id>')
+@motor_bp.patch("/<int:motor_id>")
 def patch_motor(motor_id: int) -> Response:
     content = request.get_json()
     motor_controller.patch(motor_id, content)
     return make_response("Motor updated", HTTPStatus.OK)
 
 
-@motor_bp.delete('/<int:motor_id>')
+@motor_bp.delete("/<int:motor_id>")
 def delete_motor(motor_id: int) -> Response:
     motor_controller.delete(motor_id)
     return make_response("Motor deleted", HTTPStatus.OK)
@@ -57,6 +57,7 @@ def create_all_motors() -> Response:
 def delete_all_motors() -> Response:
     motor_controller.delete_all()
     return make_response("All Motors deleted", HTTPStatus.OK)
+
 
 @motor_bp.get("cars/<int:id>")
 def get_cars_with_car_types(id: int):

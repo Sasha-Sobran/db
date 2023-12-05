@@ -18,6 +18,9 @@ def register_routes(app: Flask) -> None:
     from .advertisement.image_route import image_bp
     from .advertisement.comment_route import comment_bp
     from .car_dealership.car_dealership_route import car_dealership_bp
+    from .car_dealership.car_dealership_addresses_route import (
+        car_dealership_addresses_bp,
+    )
     from .car_dealership.car_dealership_seller_route import car_dealership_seller_bp
     from .car_dealership.user_car_dealership_route import user_car_dealership_bp
     from .user.user_route import user_bp
@@ -35,3 +38,4 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(user_car_dealership_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(seller_bp)
+    app.register_blueprint(car_dealership_addresses_bp)

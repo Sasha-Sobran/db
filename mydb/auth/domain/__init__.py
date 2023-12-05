@@ -3,6 +3,7 @@ from .car.motor import Motor
 from .car.car import Car
 from .car.test_drive import TestDrive
 from .car_dealership.car_dealership import CarDealership
+from .car_dealership.car_dealership_addresses import CarDealershipAddresses
 from .user.user import User
 from .user.seller import Seller
 from .car_dealership.user_cardealership import UserCarDealership

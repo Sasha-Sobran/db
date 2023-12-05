@@ -15,8 +15,8 @@ class Car(IDto, db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     brand_name = Column(String(30), nullable=False)
     lifted_weight = Column(Integer, nullable=False)
-    car_type_id = Column(Integer, ForeignKey('car_type.id'), nullable=False)
-    motor_id = Column(Integer, ForeignKey('motor.id'), nullable=False)
+    car_type_id = Column(Integer, ForeignKey("car_type.id"), nullable=False)
+    motor_id = Column(Integer, ForeignKey("motor.id"), nullable=False)
 
     car_type = relationship("CarType", back_populates="cars")
     motor = relationship("Motor", back_populates="cars")
@@ -24,8 +24,10 @@ class Car(IDto, db.Model):
     advertisement = relationship("Advertisement", back_populates="car")
 
     def __repr__(self):
-        return f"Car(id={self.id}, brand_name={self.brand_name}, lifted_weight={self.lifted_weight}, " \
-               f"car_type_id={self.car_type_id}, motor_id={self.motor_id})"
+        return (
+            f"Car(id={self.id}, brand_name={self.brand_name}, lifted_weight={self.lifted_weight}, "
+            f"car_type_id={self.car_type_id}, motor_id={self.motor_id})"
+        )
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> Car:

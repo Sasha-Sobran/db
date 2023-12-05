@@ -7,3 +7,6 @@ class CarTypeController(GeneralController):
 
     def get_cars(self, id):
         return [car.put_into_dto() for car in self._service.get_cars(id)]
+
+    def create_rows(self):
+        self._service.create_rows()

@@ -12,10 +12,12 @@ from mydb.auth.domain.i_dto import IDto
 class Seller(IDto, db.Model):
     __tablename__ = "seller"
 
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
     is_car_dealership_seller = Column(Integer, nullable=False)
 
-    user = relationship("User", back_populates="seller", primaryjoin="User.id == Seller.user_id")
+    user = relationship(
+        "User", back_populates="seller", primaryjoin="User.id == Seller.user_id"
+    )
     car_dealerships = relationship("CarDealershipSeller", back_populates="seller")
     advertisements = relationship("Advertisement", back_populates="seller")
 

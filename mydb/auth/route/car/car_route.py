@@ -11,12 +11,12 @@ def get_all_cars() -> Response:
     return make_response(jsonify(car_controller.find_all()), HTTPStatus.OK)
 
 
-@car_bp.get('/<int:car_id>')
+@car_bp.get("/<int:car_id>")
 def get_cars(car_id: int) -> Response:
     return make_response(jsonify(car_controller.find_by_id(car_id)), HTTPStatus.OK)
 
 
-@car_bp.put('/<int:car_id>')
+@car_bp.put("/<int:car_id>")
 def update_car(car_id: int) -> Response:
     content = request.get_json()
     car = Car.create_from_dto(content)
@@ -24,14 +24,14 @@ def update_car(car_id: int) -> Response:
     return make_response("Car updated", HTTPStatus.OK)
 
 
-@car_bp.patch('/<int:car_id>')
+@car_bp.patch("/<int:car_id>")
 def patch_car(car_id: int) -> Response:
     content = request.get_json()
     car_controller.patch(car_id, content)
     return make_response("Car updated", HTTPStatus.OK)
 
 
-@car_bp.delete('/<int:car_id>')
+@car_bp.delete("/<int:car_id>")
 def delete_car(car_id: int) -> Response:
     car_controller.delete(car_id)
     return make_response("Car deleted", HTTPStatus.OK)

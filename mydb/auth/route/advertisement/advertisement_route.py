@@ -13,12 +13,14 @@ def get_all_advertisements() -> Response:
     return make_response(jsonify(advertisement_controller.find_all()), HTTPStatus.OK)
 
 
-@advertisement_bp.get('/<int:advertisement_id>')
+@advertisement_bp.get("/<int:advertisement_id>")
 def get_advertisements(advertisement_id: int) -> Response:
-    return make_response(jsonify(advertisement_controller.find_by_id(advertisement_id)), HTTPStatus.OK)
+    return make_response(
+        jsonify(advertisement_controller.find_by_id(advertisement_id)), HTTPStatus.OK
+    )
 
 
-@advertisement_bp.put('/<int:advertisement_id>')
+@advertisement_bp.put("/<int:advertisement_id>")
 def update_advertisement(advertisement_id: int) -> Response:
     content = request.get_json()
     advertisement = Advertisement.create_from_dto(content)
@@ -26,14 +28,14 @@ def update_advertisement(advertisement_id: int) -> Response:
     return make_response("Advertisement updated", HTTPStatus.OK)
 
 
-@advertisement_bp.patch('/<int:advertisement_id>')
+@advertisement_bp.patch("/<int:advertisement_id>")
 def patch_advertisement(advertisement_id: int) -> Response:
     content = request.get_json()
     advertisement_controller.patch(advertisement_id, content)
     return make_response("Advertisement updated", HTTPStatus.OK)
 
 
-@advertisement_bp.delete('/<int:advertisement_id>')
+@advertisement_bp.delete("/<int:advertisement_id>")
 def delete_advertisement(advertisement_id: int) -> Response:
     advertisement_controller.delete(advertisement_id)
     return make_response("Advertisement deleted", HTTPStatus.OK)
@@ -44,7 +46,9 @@ def create_advertisement() -> Response:
     content = request.get_json()
     advertisement = Advertisement.create_from_dto(content)
     advertisement_id = advertisement_controller.create(advertisement)
-    return make_response(f"Advertisement created with ID: {advertisement_id}", HTTPStatus.CREATED)
+    return make_response(
+        f"Advertisement created with ID: {advertisement_id}", HTTPStatus.CREATED
+    )
 
 
 @advertisement_bp.post("/bulk")
@@ -52,7 +56,9 @@ def create_all_advertisements() -> Response:
     content = request.get_json()
     advertisements = [Advertisement.create_from_dto(data) for data in content]
     advertisement_controller.create_all(advertisements)
-    return make_response(advertisement_controller.create_all(advertisements), HTTPStatus.CREATED)
+    return make_response(
+        advertisement_controller.create_all(advertisements), HTTPStatus.CREATED
+    )
 
 
 @advertisement_bp.delete("/all")
@@ -63,8 +69,18 @@ def delete_all_advertisements() -> Response:
 
 @advertisement_bp.get("/comments/<int:advertisement_id>")
 def get_advertisement_comments(advertisement_id):
-    return make_response(jsonify(advertisement_controller.get_comments(advertisement_id)), HTTPStatus.OK)
+    return make_response(
+        jsonify(advertisement_controller.get_comments(advertisement_id)), HTTPStatus.OK
+    )
+
 
 @advertisement_bp.get("/images/<int:advertisement_id>")
 def get_advertisement_images(advertisement_id):
-    return make_response(jsonify(advertisement_controller.get_images(advertisement_id)), HTTPStatus.OK)
+    return make_response(
+        jsonify(advertisement_controller.get_images(advertisement_id)), HTTPStatus.OK
+    )
+
+
+@advertisement_bp.get("/avg_price/<string:operation>")
+def get_avg_price(operation: str):
+    return make_response(jsonify(advertisement_controller.get_avg_price(operation)), HTTPStatus.OK)

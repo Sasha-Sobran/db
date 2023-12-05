@@ -14,3 +14,6 @@ class CarTypeService(GeneralService):
         if car_type is None:
             abort(HTTPStatus.NOT_FOUND)
         return car_type.cars
+
+    def create_rows(self):
+        self._dao.create_rows()

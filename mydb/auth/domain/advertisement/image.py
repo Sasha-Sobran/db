@@ -14,7 +14,7 @@ class Image(IDto, db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     url = Column(String(100), nullable=False)
-    advertisement_id = Column(Integer, ForeignKey('advertisement.id'), nullable=False)
+    advertisement_id = Column(Integer, ForeignKey("advertisement.id"), nullable=False)
 
     advertisement = relationship("Advertisement", back_populates="images")
 

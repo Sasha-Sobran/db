@@ -19,7 +19,9 @@ class UserCarDealershipService(GeneralService):
                 user = user_dao.find_by_id(user_id)
                 result[user_id] = {
                     user.name: [
-                        car_dealership_dao.find_by_id(obj.car_dealership_id).put_into_dto()
+                        car_dealership_dao.find_by_id(
+                            obj.car_dealership_id
+                        ).put_into_dto()
                         for obj in user.car_dealerships
                     ]
                 }
@@ -36,8 +38,12 @@ class UserCarDealershipService(GeneralService):
                 car_dealership = car_dealership_dao.find_by_id(car_dealership_id)
                 result[car_dealership_id] = {
                     car_dealership.name: [
-                        user_dao.find_by_id(obj.user_id).put_into_dto() for obj in car_dealership.users
+                        user_dao.find_by_id(obj.user_id).put_into_dto()
+                        for obj in car_dealership.users
                     ]
                 }
 
         return list(result.values())
+
+    def insert_user_car_dealership(self, user_name: str, car_dealership_name: str):
+        self._dao.insert_user_car_dealership(user_name, car_dealership_name)

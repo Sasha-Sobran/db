@@ -21,14 +21,22 @@ class User(IDto, db.Model):
     gender = Column(String(25), nullable=False)
     city_name = Column(String(45), nullable=False)
 
-    seller = relationship("Seller", back_populates="user", primaryjoin="User.id == Seller.user_id")
+    seller = relationship(
+        "Seller", back_populates="user", primaryjoin="User.id == Seller.user_id"
+    )
     comments = relationship("Comment", back_populates="user")
-    car_dealerships = relationship("UserCarDealership", back_populates="user", primaryjoin="User.id == UserCarDealership.user_id")
+    car_dealerships = relationship(
+        "UserCarDealership",
+        back_populates="user",
+        primaryjoin="User.id == UserCarDealership.user_id",
+    )
 
     def __repr__(self):
-        return f"User(id={self.id}, name={self.name}, surname={self.surname}, email={self.email}, " \
-               f"phone={self.phone}, street_address={self.street_address}, gender={self.gender}, " \
-               f"city_name={self.city_name})"
+        return (
+            f"User(id={self.id}, name={self.name}, surname={self.surname}, email={self.email}, "
+            f"phone={self.phone}, street_address={self.street_address}, gender={self.gender}, "
+            f"city_name={self.city_name})"
+        )
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> User:

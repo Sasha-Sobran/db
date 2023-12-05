@@ -1,6 +1,5 @@
 import os
 
-from waitress import serve
 import yaml
 
 from mydb import create_app

@@ -13,10 +13,10 @@ class Advertisement(IDto, db.Model):
     __tablename__ = "advertisement"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    car_id = Column(Integer, ForeignKey('car.id'), nullable=False)
+    car_id = Column(Integer, ForeignKey("car.id"), nullable=False)
     price = Column(DECIMAL, nullable=False)
-    car_dealership_id = Column(Integer, ForeignKey('car_dealership.id'), nullable=False)
-    seller_id = Column(Integer, ForeignKey('seller.user_id'), nullable=False)
+    car_dealership_id = Column(Integer, ForeignKey("car_dealership.id"), nullable=False)
+    seller_id = Column(Integer, ForeignKey("seller.user_id"), nullable=False)
 
     car = relationship("Car", back_populates="advertisement")
     car_dealership = relationship("CarDealership", back_populates="advertisement")
@@ -25,8 +25,10 @@ class Advertisement(IDto, db.Model):
     comments = relationship("Comment", back_populates="advertisement")
 
     def __repr__(self):
-        return f"Advertisement(id={self.id}, car_id={self.car_id}, price={self.price}, " \
-               f"car_dealership_id={self.car_dealership_id}, seller_id={self.seller_id})"
+        return (
+            f"Advertisement(id={self.id}, car_id={self.car_id}, price={self.price}, "
+            f"car_dealership_id={self.car_dealership_id}, seller_id={self.seller_id})"
+        )
 
     @staticmethod
     def create_from_dto(dto_dict: dict[str, Any]) -> Advertisement:

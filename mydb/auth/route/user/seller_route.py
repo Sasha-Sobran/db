@@ -11,12 +11,14 @@ def get_all_sellers() -> Response:
     return make_response(jsonify(seller_controller.find_all()), HTTPStatus.OK)
 
 
-@seller_bp.get('/<int:seller_id>')
+@seller_bp.get("/<int:seller_id>")
 def get_sellers(seller_id: int) -> Response:
-    return make_response(jsonify(seller_controller.find_by_id(seller_id)), HTTPStatus.OK)
+    return make_response(
+        jsonify(seller_controller.find_by_id(seller_id)), HTTPStatus.OK
+    )
 
 
-@seller_bp.put('/<int:seller_id>')
+@seller_bp.put("/<int:seller_id>")
 def update_seller(seller_id: int) -> Response:
     content = request.get_json()
     seller = Seller.create_from_dto(content)
@@ -24,14 +26,14 @@ def update_seller(seller_id: int) -> Response:
     return make_response("Seller updated", HTTPStatus.OK)
 
 
-@seller_bp.patch('/<int:seller_id>')
+@seller_bp.patch("/<int:seller_id>")
 def patch_seller(seller_id: int) -> Response:
     content = request.get_json()
     seller_controller.patch(seller_id, content)
     return make_response("Seller updated", HTTPStatus.OK)
 
 
-@seller_bp.delete('/<int:seller_id>')
+@seller_bp.delete("/<int:seller_id>")
 def delete_seller(seller_id: int) -> Response:
     seller_controller.delete(seller_id)
     return make_response("Seller deleted", HTTPStatus.OK)
@@ -61,4 +63,6 @@ def delete_all_sellers() -> Response:
 
 @seller_bp.get("/advertisements/<int:seller_id>")
 def get_seller_advertisements(seller_id: int):
-    return make_response(jsonify(seller_controller.get_advertisements(seller_id)), HTTPStatus.OK)
+    return make_response(
+        jsonify(seller_controller.get_advertisements(seller_id)), HTTPStatus.OK
+    )

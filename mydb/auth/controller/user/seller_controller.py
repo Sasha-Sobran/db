@@ -6,4 +6,7 @@ class SellerController(GeneralController):
     _service = seller_service
 
     def get_advertisements(self, id: int):
-        return [advertisement.put_into_dto() for advertisement in self._service.get_advertisements(id)]
+        return [
+            advertisement.put_into_dto()
+            for advertisement in self._service.get_advertisements(id)
+        ]
